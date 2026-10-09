@@ -4,295 +4,384 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#FF7A59">
-<meta name="description" content="Un pequeño libro de cumpleaños, escrito solo para Mileiny.">
+<meta name="theme-color" content="#E0457B">
+<meta name="description" content="Una sorpresa de cumpleaños, hecha solo para Mileiny.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Para Mileiny, con confeti">
-<meta property="og:description" content="Un pequeño libro de cumpleaños, escrito solo para ti.">
+<meta property="og:description" content="Una sorpresa de cumpleaños, hecha solo para ti.">
 <title>Para Mileiny, con confeti</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=Quicksand:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,400;1,500;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=Quicksand:wght@500;700&display=swap">
 <style>
-  noscript ~ *{}
-
   :root{
-    --crema:#FFF6E9; --crema-hondo:#FCE9CF; --tinta:#2B1B2E; --tinta-suave:#6B5670;
-    --coral:#FF6B57; --rosa:#FF8FB1; --oro:#FFC93C; --turquesa:#26C6B0; --violeta:#7C4DDB; --azul:#2F6FED;
-    --linea:rgba(43,27,46,.14);
+    --crema:#FFF4E6; --tinta:#2A1530; --tinta-suave:#6A5470;
+    --magenta:#E0457B; --mango:#FFB02E; --violeta:#6C3FC5; --turquesa:#1FB5A6; --coral:#FF6B57; --azul:#2F6FED;
+    --linea:rgba(42,21,48,.14);
     color-scheme:light;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0; background:var(--crema); color:var(--tinta);
-    font-family:"Lora",Georgia,"Times New Roman",serif; font-size:18px; line-height:1.85; -webkit-font-smoothing:antialiased}
+  html,body{height:100%}
+  body{margin:0; background:var(--crema); color:var(--tinta); overflow:hidden;
+    font-family:"Lora",Georgia,"Times New Roman",serif; font-size:18px; line-height:1.75; -webkit-font-smoothing:antialiased}
   [hidden]{display:none !important}
   :focus-visible{outline:3px solid var(--violeta); outline-offset:3px}
-  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{animation:none !important; transition:none !important} }
+
+  /* ================= PRESENTACION ================= */
+  .deck{position:fixed; inset:0; display:flex; overflow-x:auto; overflow-y:hidden;
+    scroll-snap-type:x mandatory; scrollbar-width:none; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain}
+  .deck::-webkit-scrollbar{display:none}
+  .slide{flex:0 0 100%; width:100%; height:100%; scroll-snap-align:start; scroll-snap-stop:always;
+    overflow-y:auto; overflow-x:hidden; position:relative; display:flex; padding:max(28px,env(safe-area-inset-top)) 22px 96px}
+  .caja{margin:auto; width:100%; max-width:600px; text-align:center; position:relative; z-index:2}
+
+  .bg-portada{overflow:hidden; background:radial-gradient(60% 45% at 12% 8%, rgba(255,176,46,.65), transparent 65%),
+    radial-gradient(55% 45% at 92% 18%, rgba(224,69,123,.55), transparent 65%),
+    radial-gradient(70% 55% at 50% 100%, rgba(31,181,166,.4), transparent 65%), linear-gradient(180deg,#FFE3D0,#FFF4E6)}
+  .bg-sol{background:radial-gradient(70% 50% at 50% 0%, rgba(255,176,46,.7), transparent 70%), linear-gradient(180deg,#FFF1C9,#FFE4C9)}
+  .bg-valiente{background:radial-gradient(70% 50% at 50% 0%, rgba(224,69,123,.5), transparent 70%), linear-gradient(180deg,#FFD9DF,#FFEBDD)}
+  .bg-ternura{background:radial-gradient(70% 50% at 50% 0%, rgba(31,181,166,.45), transparent 70%), linear-gradient(180deg,#D9F4EE,#FFF4E6)}
+  .bg-puerta{background:radial-gradient(70% 50% at 50% 0%, rgba(108,63,197,.35), transparent 70%), linear-gradient(180deg,#E8DEFA,#FFF4E6)}
+  .bg-carta{background:linear-gradient(180deg,#FFF9EF,#FFE9D6)}
+  .bg-anuel{background:radial-gradient(70% 45% at 50% 0%, rgba(224,69,123,.55), transparent 70%),
+    linear-gradient(170deg,#1E0F2E,#3B1C5A 60%,#6C3FC5); color:#fff}
+
+  .etiqueta{font-family:"Quicksand",sans-serif; font-weight:700; font-size:12px; letter-spacing:.3em; text-transform:uppercase; color:var(--magenta); margin:0 0 10px}
+  .titulo-slide{font-family:"Playfair Display",Georgia,serif; font-weight:700; font-style:italic; line-height:1.08; margin:0 0 18px;
+    font-size:clamp(30px,8.4vw,50px); text-wrap:balance}
+  .texto{font-size:clamp(17px,4.4vw,20px); max-width:46ch; margin:0 auto 14px; text-wrap:pretty}
+  .texto em{color:var(--violeta)}
+  .ilus{width:min(62vw,250px); height:auto; margin:0 auto 14px; display:block; overflow:visible}
+  .ilus-ch{width:min(44vw,170px)}
+
+  .on .caja > *{animation:sube .8s cubic-bezier(.16,1,.3,1) both}
+  .on .caja > *:nth-child(2){animation-delay:.08s} .on .caja > *:nth-child(3){animation-delay:.16s}
+  .on .caja > *:nth-child(4){animation-delay:.24s} .on .caja > *:nth-child(5){animation-delay:.32s}
+  @keyframes sube{from{opacity:0; transform:translateY(22px)} to{opacity:1; transform:none}}
 
   /* ================= PORTADA ================= */
-  .portada{position:relative; min-height:100svh; overflow:hidden; display:grid; place-items:center; text-align:center;
-    padding:clamp(24px,6vw,56px) 20px 96px; isolation:isolate;
-    background:
-      radial-gradient(60% 50% at 15% 10%, rgba(255,201,60,.55), transparent 65%),
-      radial-gradient(55% 45% at 90% 20%, rgba(255,143,177,.6), transparent 65%),
-      radial-gradient(70% 55% at 50% 100%, rgba(38,198,176,.35), transparent 65%),
-      linear-gradient(180deg,#FFE9D2,#FFF6E9)}
-  #confeti{position:absolute; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none}
-
-  .banderin{position:absolute; top:0; left:0; right:0; height:64px; z-index:1; pointer-events:none}
-  .banderin svg{width:100%; height:100%; display:block}
-  .banderin .cuerda{fill:none; stroke:rgba(43,27,46,.5); stroke-width:1.5}
-
-  .globo{position:absolute; bottom:-160px; width:var(--w,64px); height:calc(var(--w,64px)*1.22);
-    border-radius:50% 50% 48% 48% / 56% 56% 44% 44%; background:var(--c); z-index:0;
+  #globos{position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0}
+  .globo{position:absolute; bottom:-170px; width:var(--w,64px); height:calc(var(--w,64px)*1.22); z-index:0;
+    border-radius:50% 50% 48% 48% / 56% 56% 44% 44%; background:var(--c);
     box-shadow:inset -8px -10px 0 rgba(0,0,0,.08), inset 9px 8px 0 rgba(255,255,255,.28);
-    animation:sube var(--d,16s) linear var(--r,0s) infinite; left:var(--x)}
+    animation:globo var(--d,16s) linear var(--r,0s) infinite; left:var(--x); opacity:.55}
   .globo::before{content:""; position:absolute; bottom:-7px; left:50%; width:10px; height:10px; background:var(--c);
     transform:translateX(-50%) rotate(45deg); border-radius:2px; filter:brightness(.92)}
   .globo::after{content:""; position:absolute; top:100%; left:50%; width:1.5px; height:calc(var(--w,64px)*1.1);
-    background:rgba(43,27,46,.4); transform:translateX(-50%); margin-top:6px}
-  @keyframes sube{
-    0%{transform:translate(0,0) rotate(-4deg)}
-    25%{transform:translate(18px,-30vh) rotate(4deg)}
-    50%{transform:translate(-14px,-65vh) rotate(-4deg)}
-    75%{transform:translate(16px,-100vh) rotate(4deg)}
-    100%{transform:translate(0,-140vh) rotate(-3deg)}
-  }
+    background:rgba(42,21,48,.35); transform:translateX(-50%); margin-top:6px}
+  @keyframes globo{0%{transform:translate(0,0) rotate(-4deg)} 25%{transform:translate(18px,-30vh) rotate(4deg)}
+    50%{transform:translate(-14px,-65vh) rotate(-4deg)} 75%{transform:translate(16px,-100vh) rotate(4deg)} 100%{transform:translate(0,-140vh) rotate(-3deg)}}
+  .banderin{position:absolute; top:0; left:0; right:0; height:64px; z-index:1; pointer-events:none}
+  .banderin svg{width:100%; height:100%; display:block}
+  .cuerda{fill:none; stroke:rgba(42,21,48,.5); stroke-width:1.5}
 
-  .portada-cuerpo{position:relative; z-index:2; max-width:760px}
-  .sobretitulo{font-family:"Quicksand",sans-serif; font-weight:700; letter-spacing:.28em; text-transform:uppercase;
-    font-size:clamp(11px,3vw,14px); color:var(--violeta); margin:0 0 18px}
-  .sobretitulo span{display:block; margin-top:8px; font-size:.82em; letter-spacing:.18em; font-weight:500; color:var(--tinta-suave)}
-  .titulo{font-family:"Playfair Display",Georgia,serif; font-weight:800; line-height:.98; margin:0;
-    font-size:clamp(46px,14vw,112px); letter-spacing:-.02em; color:var(--tinta)}
+  .lealtad{font-family:"Quicksand",sans-serif; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+    font-size:clamp(11px,3vw,13px); color:var(--violeta); margin:0 0 6px}
+  .lealtad span{display:block; margin-top:8px; font-size:.84em; letter-spacing:.14em; font-weight:500; color:var(--tinta-suave)}
+  .titulo{font-family:"Playfair Display",Georgia,serif; font-weight:800; line-height:.98; margin:6px 0 0;
+    font-size:clamp(44px,13.5vw,96px); letter-spacing:-.02em}
   .titulo .fiesta{display:block; font-style:italic; font-weight:700;
-    background:linear-gradient(95deg,var(--coral),var(--rosa) 35%,var(--violeta) 70%,var(--azul));
+    background:linear-gradient(95deg,var(--coral),var(--magenta) 40%,var(--violeta) 80%);
     -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.08em}
-  .titulo .nombre{display:block; margin-top:.14em; font-size:.62em; letter-spacing:.005em}
+  .titulo .nombre{display:block; margin-top:.12em; font-size:.62em}
   .titulo .nombre span{display:inline-block; animation:salto 2.6s ease-in-out infinite}
-  .titulo .nombre span:nth-child(2n){animation-delay:.18s}
-  .titulo .nombre span:nth-child(3n){animation-delay:.36s}
+  .titulo .nombre span:nth-child(2n){animation-delay:.18s} .titulo .nombre span:nth-child(3n){animation-delay:.36s}
   @keyframes salto{0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-.14em)}}
-  .lema{font-size:clamp(17px,4.4vw,22px); font-style:italic; max-width:34ch; margin:26px auto 0; color:var(--tinta-suave)}
+  .lema{font-size:clamp(17px,4.4vw,22px); font-style:italic; max-width:30ch; margin:20px auto 0; color:var(--tinta-suave)}
 
-  .boton{margin-top:34px; display:inline-flex; align-items:center; gap:12px; font-family:"Quicksand",sans-serif;
-    font-weight:700; font-size:16px; letter-spacing:.06em; padding:17px 30px; border:0; border-radius:999px; cursor:pointer;
-    color:#fff; background:linear-gradient(95deg,var(--coral),#FF4F8B); text-decoration:none;
-    box-shadow:0 14px 30px -12px rgba(255,79,139,.8); transition:transform .25s, box-shadow .25s}
-  .boton:hover{transform:translateY(-3px) scale(1.03); box-shadow:0 20px 34px -12px rgba(255,79,139,.85)}
+  .boton{margin-top:26px; display:inline-flex; align-items:center; gap:12px; font-family:"Quicksand",sans-serif;
+    font-weight:700; font-size:16px; letter-spacing:.06em; padding:16px 30px; border:0; border-radius:999px; cursor:pointer;
+    color:#fff; background:linear-gradient(95deg,var(--coral),var(--magenta)); text-decoration:none;
+    box-shadow:0 14px 30px -12px rgba(224,69,123,.8); transition:transform .25s, box-shadow .25s}
+  .boton:hover{transform:translateY(-3px) scale(1.03)}
   .boton svg{width:22px; height:22px}
-  .pista{position:absolute; bottom:22px; left:0; right:0; text-align:center; z-index:2;
-    font-family:"Quicksand",sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--tinta-suave)}
-  .pista i{display:block; width:2px; height:26px; margin:8px auto 0; background:linear-gradient(var(--tinta-suave),transparent); animation:cae 1.8s ease-in-out infinite}
-  @keyframes cae{0%{transform:scaleY(.2); transform-origin:top} 60%{transform:scaleY(1); transform-origin:top} 100%{transform:scaleY(0); transform-origin:bottom}}
+  .boton.spotify{background:#1DB954; color:#08210f; box-shadow:0 14px 30px -12px rgba(29,185,84,.8)}
 
-  /* ================= LIBRO ================= */
-  .libro{max-width:680px; margin:0 auto; padding:clamp(56px,10vw,110px) 22px 40px}
-  .js .revela{opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s cubic-bezier(.16,1,.3,1)}
-  .js .revela.visible{opacity:1; transform:none}
-
-  .cabeza{text-align:center; margin-bottom:34px}
-  .cabeza .num{font-family:"Quicksand",sans-serif; font-weight:700; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:var(--coral); display:block; margin-bottom:10px}
-  .cabeza h2{font-family:"Playfair Display",Georgia,serif; font-weight:700; font-style:italic; font-size:clamp(32px,8.4vw,52px); line-height:1.08; margin:0}
-  .cabeza .adorno{display:block; margin:20px auto 0; width:90px; height:12px}
-
-  .libro p{margin:0 0 1.35em}
-  .libro p.capitular::first-letter{font-family:"Playfair Display",Georgia,serif; font-weight:800; float:left;
-    font-size:4.3em; line-height:.8; padding:.08em .12em 0 0; color:var(--coral)}
-  .libro em{color:var(--violeta)}
-  .libro mark{background:linear-gradient(transparent 58%, rgba(255,201,60,.6) 0); color:inherit; padding:0 .08em}
-
-  .seccion{margin-bottom:clamp(64px,11vw,110px)}
-
-  .cita{margin:46px -8px; padding:44px 26px 28px; border-radius:22px; text-align:center; position:relative;
-    background:linear-gradient(145deg,#FFFFFF,var(--crema-hondo)); border:1px solid var(--linea);
-    box-shadow:0 26px 50px -34px rgba(124,77,219,.55)}
+  /* ================= PUERTA (prefacio) ================= */
+  .cita{margin:26px 0; padding:40px 22px 24px; border-radius:22px; text-align:center; position:relative;
+    background:linear-gradient(145deg,#FFFFFF,#F6EAFE); border:1px solid var(--linea); box-shadow:0 26px 50px -34px rgba(108,63,197,.55)}
   .cita::before{content:"\201C"; position:absolute; top:-16px; height:38px; overflow:hidden; left:50%; transform:translateX(-50%);
-    font-family:"Playfair Display",serif; font-size:76px; line-height:1.0; color:var(--rosa);
-    background:var(--crema); padding:0 14px}
+    font-family:"Playfair Display",serif; font-size:76px; line-height:1; color:var(--magenta); background:#FBF3F4; padding:0 14px}
   .cita q{display:block; font-family:"Playfair Display",Georgia,serif; font-style:italic; font-weight:500;
-    font-size:clamp(21px,5.4vw,29px); line-height:1.4; quotes:none; text-wrap:balance}
-  .cita cite{display:block; margin-top:18px; font-style:normal; font-family:"Quicksand",sans-serif; font-weight:700;
-    font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--tinta-suave)}
+    font-size:clamp(20px,5.2vw,27px); line-height:1.4; quotes:none; text-wrap:balance}
+  .cita cite{display:block; margin-top:16px; font-style:normal; font-family:"Quicksand",sans-serif; font-weight:700;
+    font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--tinta-suave)}
+  .puerta .texto{text-align:left}
+  mark{background:linear-gradient(transparent 58%, rgba(255,176,46,.6) 0); color:inherit; padding:0 .08em}
 
-  /* ================= BANDA SONORA ================= */
-  .banda-sonora{padding:clamp(40px,7vw,64px) 20px clamp(48px,8vw,80px); margin:0 0 20px;
-    background:linear-gradient(160deg,#2B1B2E,#4A2A6B 60%,#7C4DDB); color:#fff; text-align:center;
-    position:relative; overflow:hidden}
-  .banda-sonora::before,.banda-sonora::after{content:""; position:absolute; border-radius:50%; filter:blur(6px); opacity:.35}
-  .banda-sonora::before{width:240px; height:240px; background:var(--rosa); top:-90px; left:-70px}
-  .banda-sonora::after{width:200px; height:200px; background:var(--turquesa); bottom:-80px; right:-50px}
-  .banda-sonora .interior{position:relative; z-index:1; max-width:640px; margin:0 auto}
-  .banda-sonora .num{font-family:"Quicksand",sans-serif; font-weight:700; font-size:12px; letter-spacing:.34em; text-transform:uppercase; color:var(--oro)}
-  .banda-sonora h2{font-family:"Playfair Display",Georgia,serif; font-style:italic; font-weight:700; font-size:clamp(30px,8vw,46px); line-height:1.1; margin:10px 0 14px}
-  .banda-sonora p{font-size:17px; max-width:42ch; margin:0 auto 26px; color:rgba(255,255,255,.86)}
-  .banda-sonora .spotify{margin-top:0; background:#1DB954; color:#0b1f12; box-shadow:0 14px 30px -12px rgba(29,185,84,.8)}
+  /* ================= CARTA ================= */
+  .carta{background:#FFFDF8; border:1px solid var(--linea); border-radius:8px; padding:clamp(22px,6vw,40px); text-align:left;
+    box-shadow:0 30px 60px -38px rgba(42,21,48,.55);
+    background-image:repeating-linear-gradient(transparent 0 35px, rgba(108,63,197,.06) 35px 36px); background-position:0 12px}
+  .carta .saludo{font-family:"Playfair Display",Georgia,serif; font-style:italic; font-weight:700; font-size:clamp(26px,7vw,34px); margin:0 0 14px}
+  .carta p{margin:0 0 1.1em; font-size:clamp(16px,4.2vw,18px)}
+  .deseos{list-style:none; margin:18px 0; padding:0; display:grid; gap:10px}
+  .deseos li{padding-left:32px; position:relative; font-style:italic; font-size:clamp(16px,4.2vw,18px); line-height:1.6}
+  .deseos li::before{content:""; position:absolute; left:2px; top:.5em; width:15px; height:15px; background:var(--c,var(--coral)); border-radius:50% 50% 50% 0; transform:rotate(-45deg)}
+  .deseos li:nth-child(2n)::before{--c:var(--turquesa)} .deseos li:nth-child(3n)::before{--c:var(--mango)}
+  .firma{font-family:"Playfair Display",Georgia,serif; font-style:italic; font-weight:700; font-size:32px; margin:18px 0 0 !important; line-height:1.1}
+  .firma small{display:block; font-family:"Quicksand",sans-serif; font-style:normal; font-weight:700; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--tinta-suave); margin-top:6px}
 
-  /* ================= EPILOGO ================= */
-  .carta{background:#FFFDF8; border:1px solid var(--linea); border-radius:6px; padding:clamp(28px,7vw,52px);
-    box-shadow:0 30px 60px -38px rgba(43,27,46,.55); position:relative;
-    background-image:repeating-linear-gradient(transparent 0 35px, rgba(124,77,219,.06) 35px 36px); background-position:0 12px}
-  .carta .saludo{font-family:"Playfair Display",Georgia,serif; font-style:italic; font-weight:700; font-size:clamp(26px,7vw,36px); margin:0 0 20px}
-  .carta .deseos{list-style:none; margin:28px 0; padding:0; display:grid; gap:14px}
-  .carta .deseos li{padding-left:34px; position:relative; font-style:italic}
-  .carta .deseos li::before{content:""; position:absolute; left:2px; top:.55em; width:16px; height:16px;
-    background:var(--c,var(--coral)); border-radius:50% 50% 50% 0; transform:rotate(-45deg)}
-  .carta .deseos li:nth-child(2n)::before{--c:var(--turquesa)}
-  .carta .deseos li:nth-child(3n)::before{--c:var(--oro)}
-  .carta .firma{font-family:"Playfair Display",Georgia,serif; font-style:italic; font-weight:700; font-size:34px; margin:26px 0 0; line-height:1.1}
-  .carta .firma small{display:block; font-family:"Quicksand",sans-serif; font-style:normal; font-weight:700;
-    font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--tinta-suave); margin-top:8px}
+  /* ================= ANUEL: reproductor tipo iPhone ================= */
+  .telefono{width:min(62vw,250px); margin:0 auto; padding:11px; border-radius:46px; background:linear-gradient(145deg,#2d2d33,#0e0e12);
+    box-shadow:0 40px 60px -30px rgba(0,0,0,.8), inset 0 0 0 2px rgba(255,255,255,.08); position:relative}
+  .pantalla{border-radius:36px; overflow:hidden; background:linear-gradient(180deg,#6a2a8c 0%,#2a1245 55%,#150a24 100%); padding:14px 20px 22px; color:#fff; text-align:left}
+  .isla{width:86px; height:24px; background:#000; border-radius:14px; margin:0 auto 10px}
+  .estado{display:flex; justify-content:space-between; font-family:"Quicksand",sans-serif; font-weight:700; font-size:12px; opacity:.9; margin:0 6px 12px}
+  .portada-disco{aspect-ratio:1; border-radius:14px; display:grid; place-items:center; position:relative; overflow:hidden;
+    background:radial-gradient(circle at 30% 25%, #FFB02E, transparent 55%), linear-gradient(145deg,#E0457B,#6C3FC5);
+    box-shadow:0 20px 30px -14px rgba(0,0,0,.7)}
+  .portada-disco svg{width:56%; height:56%; filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+  .portada-disco .anillo{position:absolute; inset:0; border-radius:inherit; box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+  .pista-nombre{font-family:"Quicksand",sans-serif; font-weight:700; font-size:19px; margin:14px 0 0; line-height:1.2; display:flex; justify-content:space-between; align-items:center; gap:8px}
+  .pista-artista{font-family:"Quicksand",sans-serif; font-size:14px; opacity:.7; margin:2px 0 0}
+  .barra{height:4px; background:rgba(255,255,255,.25); border-radius:4px; margin:14px 0 4px; position:relative; overflow:hidden}
+  .barra i{position:absolute; inset:0 auto 0 0; width:34%; background:#fff; border-radius:4px}
+  .reproduciendo .barra i{animation:progreso 22s linear infinite}
+  @keyframes progreso{from{width:34%} to{width:100%}}
+  .tiempos{display:flex; justify-content:space-between; font-family:"Quicksand",sans-serif; font-size:11px; opacity:.65}
+  .controles{display:flex; justify-content:space-between; align-items:center; margin-top:8px}
+  .controles svg{width:26px; height:26px; fill:#fff}
+  .play{width:62px; height:62px; border-radius:50%; background:#fff; display:grid; place-items:center; border:0; cursor:pointer; padding:0; transition:transform .2s}
+  .play:hover{transform:scale(1.06)}
+  .play svg{width:28px; height:28px; fill:#2A1245}
+  .play .ic-pausa{display:none} .reproduciendo .play .ic-play{display:none} .reproduciendo .play .ic-pausa{display:block}
+  .barra-casa{width:110px; height:4px; background:rgba(255,255,255,.55); border-radius:4px; margin:16px auto 0}
+  .nota-anuel{font-size:15px; opacity:.85; margin:14px auto 0; max-width:34ch; line-height:1.55}
 
-  /* ================= FINAL ================= */
-  .final{position:relative; text-align:center; padding:clamp(80px,14vw,150px) 20px clamp(100px,16vw,170px); overflow:hidden;
-    background:radial-gradient(60% 60% at 50% 40%, rgba(255,107,87,.18), transparent 70%)}
-  .final .placa{display:inline-block; max-width:760px; position:relative}
-  .final .corazon{width:64px; height:64px; margin:0 auto 18px; display:block; animation:late 1.6s ease-in-out infinite}
-  @keyframes late{0%,100%{transform:scale(1)} 14%{transform:scale(1.18)} 28%{transform:scale(1)} 42%{transform:scale(1.12)} 70%{transform:scale(1)}}
-  .final q{display:block; quotes:none; font-family:"Playfair Display",Georgia,serif; font-weight:800; font-style:italic;
-    font-size:clamp(40px,12.5vw,104px); line-height:1; letter-spacing:-.02em;
-    background:linear-gradient(95deg,var(--coral),#FF4F8B 45%,var(--violeta));
-    -webkit-background-clip:text; background-clip:text; color:transparent; padding:0 .05em .1em; text-wrap:balance}
-  .final cite{display:block; margin-top:22px; font-style:normal; font-family:"Quicksand",sans-serif; font-weight:700;
-    letter-spacing:.34em; text-transform:uppercase; font-size:clamp(12px,3.4vw,15px); color:var(--tinta-suave)}
-  .final .nota{font-size:14px; color:var(--tinta-suave); margin-top:56px; font-style:italic}
-  .final .repetir{margin-top:22px; background:transparent; color:var(--violeta); border:2px solid var(--violeta); box-shadow:none}
-  .final .repetir:hover{background:var(--violeta); color:#fff; box-shadow:0 14px 28px -14px rgba(124,77,219,.8)}
+  /* ================= NAVEGACION ================= */
+  .puntos{position:fixed; left:0; right:0; bottom:0; padding:26px 0 max(18px,env(safe-area-inset-bottom)); background:linear-gradient(transparent, var(--fade,rgba(255,244,230,.94)) 60%); display:flex; justify-content:center; gap:9px; z-index:20; pointer-events:none}
+  .puntos button{pointer-events:auto; width:10px; height:10px; border-radius:50%; border:0; padding:0; background:rgba(42,21,48,.25); cursor:pointer; transition:.3s}
+  .puntos button.act{width:28px; border-radius:6px; background:var(--magenta)}
+  .flecha{position:fixed; top:50%; transform:translateY(-50%); z-index:20; width:46px; height:46px; border-radius:50%; border:0; cursor:pointer;
+    background:rgba(255,255,255,.82); box-shadow:0 8px 20px -8px rgba(42,21,48,.5); display:none; place-items:center}
+  .flecha svg{width:22px; height:22px; fill:none; stroke:var(--tinta); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round}
+  .flecha.izq{left:14px} .flecha.der{right:14px}
+  @media (hover:hover) and (min-width:700px){ .flecha{display:grid} }
+  .flecha[disabled]{opacity:.3; cursor:default}
+  #confeti{position:fixed; inset:0; width:100%; height:100%; z-index:15; pointer-events:none}
+  .deslizar{font-family:"Quicksand",sans-serif; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--tinta-suave); margin-top:22px}
+
+  @media (prefers-reduced-motion:reduce){ .globo,.titulo .nombre span,.reproduciendo .barra i{animation:none !important} .on .caja > *{animation:none !important} }
 </style>
 </head>
 <body>
-<script>document.documentElement.className="js"</script>
 
-<!-- ================= PORTADA ================= -->
-<header class="portada" id="inicio">
-  <canvas id="confeti" aria-hidden="true"></canvas>
+<canvas id="confeti" aria-hidden="true"></canvas>
 
-  <div class="banderin" aria-hidden="true">
-    <svg viewBox="0 0 1200 64" preserveAspectRatio="none" id="banderines">
-      <path class="cuerda" d="M0 8 Q300 62 600 24 T1200 8"/>
-    </svg>
-  </div>
+<main class="deck" id="deck">
 
-  <div id="globos" aria-hidden="true"></div>
+  <!-- 1. PORTADA -->
+  <section class="slide bg-portada" id="s1" aria-label="Portada">
+    <div class="banderin" aria-hidden="true"><svg viewBox="0 0 1200 64" preserveAspectRatio="none" id="banderines"><path class="cuerda" d="M0 8 Q300 62 600 24 T1200 8"/></svg></div>
+    <div id="globos" aria-hidden="true"></div>
+    <div class="caja">
+      <p class="lealtad">Siempre leal, nunca sapo.<span>Yo me voy a morir leal y nunca como un traicionero</span></p>
+      <h1 class="titulo">
+        <span class="fiesta">¡Feliz cumpleaños!</span>
+        <span class="nombre" id="nombre" aria-label="Mileiny">Mileiny</span>
+      </h1>
+      <p class="lema">Un día así merece una sorpresa. Esta es la tuya.</p>
+      <button class="boton" type="button" id="empezar">
+        Empezar
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18"/>
+          <path d="M12 8C9 8 7 6.6 7 5a2 2 0 0 1 3.4-1.4C11.4 4.6 12 6 12 8zm0 0c3 0 5-1.4 5-3a2 2 0 0 0-3.4-1.4C12.6 4.6 12 6 12 8z"/>
+        </svg>
+      </button>
+      <p class="deslizar">Desliza →</p>
+    </div>
+  </section>
 
-  <div class="portada-cuerpo">
-    <p class="sobretitulo">Siempre leal, nunca sapo.<span>Yo me voy a morir leal y nunca como un traicionero</span></p>
-    <h1 class="titulo">
-      <span class="fiesta">¡Feliz cumpleaños!</span>
-      <span class="nombre" id="nombre" aria-label="Mileiny">Mileiny</span>
-    </h1>
-    <p class="lema">Hay días que merecen un libro entero. Este es uno de ellos.</p>
-    <a class="boton" href="#prefacio" id="abrir">
-      Abrir tu regalo
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18"/>
-        <path d="M12 8C9 8 7 6.6 7 5a2 2 0 0 1 3.4-1.4C11.4 4.6 12 6 12 8zm0 0c3 0 5-1.4 5-3a2 2 0 0 0-3.4-1.4C12.6 4.6 12 6 12 8z"/>
+  <!-- 2. SONRISA -->
+  <section class="slide bg-sol" id="s2" aria-label="La sonrisa">
+    <div class="caja">
+      <svg class="ilus" viewBox="0 0 240 240" role="img" aria-label="Un sol sonriente">
+        <g stroke="#FFB02E" stroke-width="10" stroke-linecap="round">
+          <path d="M120 14v26M120 200v26M14 120h26M200 120h26M45 45l18 18M177 177l18 18M195 45l-18 18M63 177l-18 18"/>
+        </g>
+        <circle cx="120" cy="120" r="64" fill="#FFC93C"/>
+        <circle cx="120" cy="120" r="64" fill="none" stroke="#F59E0B" stroke-width="4"/>
+        <circle cx="98" cy="108" r="7" fill="#2A1530"/><circle cx="142" cy="108" r="7" fill="#2A1530"/>
+        <circle cx="100" cy="105" r="2.4" fill="#fff"/><circle cx="144" cy="105" r="2.4" fill="#fff"/>
+        <ellipse cx="84" cy="130" rx="11" ry="7" fill="#FF8FA8" opacity=".7"/><ellipse cx="156" cy="130" rx="11" ry="7" fill="#FF8FA8" opacity=".7"/>
+        <path d="M90 134c8 24 52 24 60 0z" fill="#2A1530"/>
+        <path d="M100 148c10 7 30 7 40 0" fill="#FF6B7A"/>
       </svg>
-    </a>
-  </div>
-  <div class="pista" aria-hidden="true">Desliza<i></i></div>
-</header>
-
-<!-- ================= LIBRO ================= -->
-<main class="libro">
-
-  <section class="seccion revela" id="prefacio">
-    <div class="cabeza">
-      <span class="num">Prefacio</span>
-      <h2>Antes de empezar</h2>
-      <svg class="adorno" viewBox="0 0 90 12" aria-hidden="true"><path d="M0 6h34M56 6h34" stroke="#FF8FB1" stroke-width="2" stroke-linecap="round"/><circle cx="45" cy="6" r="4" fill="#FFC93C"/></svg>
+      <p class="etiqueta">La sonrisa</p>
+      <h2 class="titulo-slide">Una sonrisa que llega primero</h2>
+      <p class="texto">Hay sonrisas de cortesía y sonrisas de verdad. La tuya es de las que arrugan los ojos, levantan el ánimo del que la recibe y le recuerdan al día que todavía tenía arreglo.</p>
+      <p class="texto">Eres alegre sin esfuerzo aparente. Cerca de ti, hasta lo ordinario adquiere cierto brillo de domingo.</p>
     </div>
-    <p class="capitular">Hay personas que sienten en silencio y otras que lo sienten todo en voz alta: con la cara, con las manos, con la risa que no pide permiso. Tú perteneces a las segundas, y qué regalo es eso. Tu expresividad es una forma de generosidad: no dejas a nadie adivinando cómo estás ni qué piensas, y en un mundo tan lleno de máscaras eso se agradece. Que nunca se te apague. Que ningún mal día, ninguna crítica y ningún escéptico te convenzan de bajar el volumen de lo que eres.</p>
+  </section>
 
-    <p>Vargas Llosa, en el discurso con que recibió el Nobel, confesó que aprender a leer fue lo más importante que le ocurrió en la vida.</p>
+  <!-- 3. VALIENTE -->
+  <section class="slide bg-valiente" id="s3" aria-label="Corazón valiente">
+    <div class="caja">
+      <svg class="ilus" viewBox="0 0 240 240" role="img" aria-label="Una montaña con una bandera en la cima y una estrella">
+        <circle cx="178" cy="52" r="26" fill="#FFB02E" opacity=".9"/>
+        <path d="M0 214L88 78l48 70 34-42 70 108z" fill="#6C3FC5"/>
+        <path d="M88 78l-24 36 18-8 12 12 10-10 10 10z" fill="#fff" opacity=".9"/>
+        <path d="M88 78V38" stroke="#2A1530" stroke-width="4" stroke-linecap="round"/>
+        <path d="M88 38l36 10-36 12z" fill="#E0457B"/>
+        <path d="M0 214h240v14H0z" fill="#4C2A96"/>
+        <path d="M40 40l4 10 11 1-8 7 3 11-10-6-10 6 3-11-8-7 11-1z" fill="#FFB02E"/>
+      </svg>
+      <p class="etiqueta">El coraje</p>
+      <h2 class="titulo-slide">De corazón valiente</h2>
+      <p class="texto">Tu alegría no es ingenua: ha tenido que pelear, levantarse y seguir. Se nota en cómo hablas de lo que persigues y en esa terquedad hermosa de quien sabe que las cosas buenas no se regalan: se <em>arman</em>.</p>
+      <p class="texto">Luchadora de las que no presumen, de las que avanzan.</p>
+    </div>
+  </section>
 
-    <figure class="cita revela">
-      <q>Aprendí a leer a los cinco años… Es lo más importante que me ha pasado en la vida.</q>
-      <cite>Mario Vargas Llosa · «Elogio de la lectura y la ficción»</cite>
-    </figure>
+  <!-- 4. TERNURA -->
+  <section class="slide bg-ternura" id="s4" aria-label="La ternura">
+    <div class="caja">
+      <svg class="ilus" viewBox="0 0 240 240" role="img" aria-label="Una flor con una mariposa">
+        <path d="M120 120v104" stroke="#168B7F" stroke-width="7" stroke-linecap="round"/>
+        <path d="M120 190c-30-4-44-18-48-40 28 0 44 14 48 40z" fill="#1FB5A6"/>
+        <path d="M120 170c26-2 40-14 46-34-26 0-42 12-46 34z" fill="#27C9B8"/>
+        <g transform="translate(120 100)">
+          <g fill="#FF8FB1">
+            <ellipse cy="-40" rx="19" ry="32"/><ellipse cy="-40" rx="19" ry="32" transform="rotate(60)"/><ellipse cy="-40" rx="19" ry="32" transform="rotate(120)"/>
+            <ellipse cy="-40" rx="19" ry="32" transform="rotate(180)"/><ellipse cy="-40" rx="19" ry="32" transform="rotate(240)"/><ellipse cy="-40" rx="19" ry="32" transform="rotate(300)"/>
+          </g>
+          <circle r="22" fill="#FFC93C"/><circle r="9" cx="-5" cy="-5" fill="#FFE9A8"/>
+        </g>
+        <g transform="translate(184 46) rotate(14)">
+          <path d="M0 0C-6-20-26-22-26-10-26-1-10 4 0 0z" fill="#FFB02E" stroke="#B7791F" stroke-width="1.2"/>
+          <path d="M0 0C6-20 26-22 26-10 26-1 10 4 0 0z" fill="#FFB02E" stroke="#B7791F" stroke-width="1.2"/>
+          <path d="M0 2C-5 10-16 12-14 20-8 24-1 14 0 4z" fill="#F59E0B"/>
+          <path d="M0 2C5 10 16 12 14 20 8 24 1 14 0 4z" fill="#F59E0B"/>
+          <ellipse cy="6" rx="2" ry="10" fill="#5A4327"/>
+        </g>
+      </svg>
+      <p class="etiqueta">La ternura</p>
+      <h2 class="titulo-slide">La ternura también es fuerza</h2>
+      <p class="texto">Hace falta una fortaleza enorme para seguir siendo tierna en un mundo que premia a los duros. Tú escoges la ternura todos los días, como quien escoge el color más bonito del lápiz.</p>
+      <p class="texto">Lo cierto es que uno se siente cómodo a tu lado, que es, quizá, el mayor elogio que se le puede hacer a alguien.</p>
+    </div>
+  </section>
 
-    <p>Yo creo que lo segundo más importante es aprender a leer a una persona: sus silencios, su manera de enfrentar el día, el valor que esconde detrás de una sonrisa. Hacerlo con calma, página a página. Contigo, esa lectura promete ser de las buenas.</p>
-    <p>Este librito no pretende biografiarte; sería un atrevimiento, apenas nos hemos tratado. Es, más bien, un apunte hecho desde la puerta, de esos que escribe quien se asoma a una casa donde hay fiesta y, sin entrar todavía, entiende que ahí se vive bien.</p>
-    <p>Y desde la puerta, <mark>se ve muchísimo</mark>.</p>
+  <!-- 5. DESDE LA PUERTA (antes: Prefacio) -->
+  <section class="slide bg-puerta puerta" id="s5" aria-label="Desde la puerta">
+    <div class="caja">
+      <svg class="ilus ilus-ch" viewBox="0 0 200 220" role="img" aria-label="Una puerta entreabierta con luz y confeti">
+        <path d="M60 32h80v176H60z" fill="#4C2A96"/>
+        <path d="M68 40h64v160H68z" fill="#FFE9A8"/>
+        <path d="M68 40l-40 14v146l40 0z" fill="#6C3FC5"/>
+        <circle cx="42" cy="128" r="4" fill="#FFB02E"/>
+        <g opacity=".95"><rect x="88" y="70" width="8" height="8" fill="#E0457B" transform="rotate(20 92 74)"/><rect x="108" y="98" width="8" height="8" fill="#1FB5A6" transform="rotate(-18 112 102)"/>
+        <rect x="84" y="130" width="8" height="8" fill="#6C3FC5" transform="rotate(35 88 134)"/><rect x="110" y="156" width="8" height="8" fill="#FF6B57" transform="rotate(8 114 160)"/></g>
+        <path d="M0 208h200v8H0z" fill="#2A1530" opacity=".25"/>
+      </svg>
+      <p class="etiqueta">Desde la puerta</p>
+      <h2 class="titulo-slide">Antes de empezar</h2>
+      <p class="texto">Hay personas que sienten en silencio y otras que lo sienten todo en voz alta: con la cara, con las manos, con la risa que no pide permiso. Tú perteneces a las segundas, y qué regalo es eso. Tu expresividad es una forma de generosidad: no dejas a nadie adivinando cómo estás ni qué piensas, y en un mundo tan lleno de máscaras eso se agradece. Que nunca se te apague. Que ningún mal día, ninguna crítica y ningún escéptico te convenzan de bajar el volumen de lo que eres.</p>
+      <p class="texto">Vargas Llosa, en el discurso con que recibió el Nobel, confesó que aprender a leer fue lo más importante que le ocurrió en la vida.</p>
+      <figure class="cita" style="margin-inline:0">
+        <q>Aprendí a leer a los cinco años… Es lo más importante que me ha pasado en la vida.</q>
+        <cite>Mario Vargas Llosa · «Elogio de la lectura y la ficción»</cite>
+      </figure>
+      <p class="texto">Yo creo que lo segundo más importante es aprender a leer a una persona: sus silencios, su manera de enfrentar el día, el valor que esconde detrás de una sonrisa. Hacerlo con calma, página a página. Contigo, esa lectura promete ser de las buenas.</p>
+      <p class="texto">Esta sorpresa no pretende biografiarte; sería un atrevimiento, apenas nos hemos tratado. Es, más bien, un apunte hecho desde la puerta, de esos que escribe quien se asoma a una casa donde hay fiesta y, sin entrar todavía, entiende que ahí se vive bien.</p>
+      <p class="texto">Y desde la puerta, <mark>se ve muchísimo</mark>.</p>
+    </div>
+  </section>
+
+  <!-- 6. CARTA DE LARRY -->
+  <section class="slide bg-carta" id="s6" aria-label="Carta de Larry">
+    <div class="caja">
+      <svg class="ilus ilus-ch" viewBox="0 0 220 160" role="img" aria-label="Un sobre con una estrella">
+        <rect x="14" y="30" width="192" height="116" rx="10" fill="#FFFDF8" stroke="#2A1530" stroke-opacity=".25" stroke-width="2"/>
+        <path d="M14 40l96 66 96-66" fill="none" stroke="#2A1530" stroke-opacity=".3" stroke-width="2"/>
+        <path d="M14 140l70-52M206 140l-70-52" fill="none" stroke="#2A1530" stroke-opacity=".18" stroke-width="2"/>
+        <circle cx="110" cy="100" r="22" fill="#E0457B"/>
+        <path d="M110 86l4.6 9.6 10.4 1.2-7.8 7 2.2 10.4-9.4-5.4-9.4 5.4 2.2-10.4-7.8-7 10.4-1.2z" fill="#FFE9A8"/>
+      </svg>
+      <p class="etiqueta">Epílogo</p>
+      <div class="carta">
+        <p class="saludo">Querida Mileiny:</p>
+        <p>Esta sorpresa la prepara Larry, que es quien te la dedica, y lo hace con el cariño sincero de quien está encantado de haberte conocido.</p>
+        <p>No hace falta tener mucho tiempo con alguien para saber que vale la pena. A veces basta una conversación, una risa o una forma de ver las cosas para darse cuenta de que la vida acaba de ponerte enfrente a una persona buena. Eso fue lo que me pasó contigo, y por eso quise regalarte algo que no se compra en ninguna tienda: unas cuantas palabras cuidadas, hechas a tu medida.</p>
+        <p>Así que, en este día tan tuyo, déjame desearte algunas cosas:</p>
+        <ul class="deseos">
+          <li>Que nunca tengas que pedir permiso para ser feliz.</li>
+          <li>Que la gente que te rodee sea tan generosa contigo como tú lo eres con ellos.</li>
+          <li>Que tu valentía encuentre siempre puertas abiertas, y que si alguna está cerrada, tengas a quien te preste el hombro para tumbarla.</li>
+          <li>Que cada sueño que persigues te lleve un poco más cerca de ti misma.</li>
+          <li>Que te sientas, hoy y todos los días, querida, cuidada y en casa dondequiera que estés.</li>
+        </ul>
+        <p>Gracias por ser como eres: luminosa, tierna, auténtica. Gracias por dejarme asomarme a tu mundo. Ojalá este año te trate con la misma bondad con que tú tratas a los demás, y ojalá me toque ver buena parte de él desde la primera fila.</p>
+        <p class="firma">Con mucho cariño,<small>Larry</small></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ANUEL: reproductor -->
+  <section class="slide bg-anuel" id="s7" aria-label="Anuel">
+    <div class="caja">
+      <p class="etiqueta" style="color:#FFB02E">Banda sonora</p>
+      <div class="telefono" id="telefono">
+        <div class="pantalla">
+          <div class="isla"></div>
+          <div class="estado"><span>9:41</span><span>● ● ●</span></div>
+          <div class="portada-disco">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><path fill="#FFE9A8" d="M50 8l11.8 27.4 29.7 2.7-22.5 19.6 6.7 29.1L50 71.6 24.3 86.8 31 57.7 8.5 38.1l29.7-2.7z"/></svg>
+            <span class="anillo"></span>
+          </div>
+          <p class="pista-nombre"><span>Real hasta la muerte</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#1DB954" d="M12 2l2.9 6.6 7.1.7-5.4 4.7 1.6 7L12 17.3 5.8 21l1.6-7L2 9.300l7.100-.7z"/></svg>
+          </p>
+          <p class="pista-artista">Anuel AA</p>
+          <div class="barra"><i></i></div>
+          <div class="tiempos"><span>1:14</span><span>-2:31</span></div>
+          <div class="controles">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3l4 4-4 4V8H5V6h12zM7 21l-4-4 4-4v3h12v2H7z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h2v12H6zm3.5 6L18 6v12z"/></svg>
+            <button class="play" type="button" id="play" aria-label="Reproducir">
+              <svg class="ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              <svg class="ic-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+            </button>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 6h2v12h-2zM6 18V6l8.500 6z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v3l4-4-4-4v3H5v6h2zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2z"/></svg>
+          </div>
+          <div class="barra-casa"></div>
+        </div>
+      </div>
+      <a class="boton spotify" id="spotify" style="margin-top:20px" target="_blank" rel="noopener" href="https://open.spotify.com/playlist/2upJkQO6wreR1uPZxHE4l4">Abrir la playlist en Spotify</a>
+      <p class="nota-anuel">Toca el botón, dale play y deja que la fiesta siga. Feliz cumpleaños, Mileiny.</p>
+    </div>
   </section>
 
 </main>
 
-<main class="libro" style="padding-top:clamp(40px,7vw,70px)">
-  <!-- ================= EPILOGO ================= -->
-  <section class="seccion revela" id="epilogo">
-    <div class="cabeza">
-      <span class="num">Epílogo</span>
-      <h2>Una carta de Larry</h2>
-      <svg class="adorno" viewBox="0 0 90 12" aria-hidden="true"><path d="M0 6h34M56 6h34" stroke="#FF8FB1" stroke-width="2" stroke-linecap="round"/><circle cx="45" cy="6" r="4" fill="#FFC93C"/></svg>
-    </div>
-
-    <div class="carta">
-      <p class="saludo">Querida Mileiny:</p>
-      <p>Este libro lo escribe Larry, que es quien te lo dedica, y lo hace con el cariño sincero de quien está encantado de haberte conocido.</p>
-      <p>No hace falta tener mucho tiempo con alguien para saber que vale la pena. A veces basta una conversación, una risa o una forma de ver las cosas para darse cuenta de que la vida acaba de ponerte enfrente a una persona buena. Eso fue lo que me pasó contigo, y por eso quise regalarte algo que no se compra en ninguna tienda: unas cuantas palabras cuidadas, hechas a tu medida.</p>
-      <p>Así que, en este día tan tuyo, déjame desearte algunas cosas:</p>
-      <ul class="deseos">
-        <li>Que nunca tengas que pedir permiso para ser feliz.</li>
-        <li>Que la gente que te rodee sea tan generosa contigo como tú lo eres con ellos.</li>
-        <li>Que tu valentía encuentre siempre puertas abiertas, y que si alguna está cerrada, tengas a quien te preste el hombro para tumbarla.</li>
-        <li>Que cada sueño que persigues te lleve un poco más cerca de ti misma.</li>
-        <li>Que te sientas, hoy y todos los días, querida, cuidada y en casa dondequiera que estés.</li>
-      </ul>
-      <p>Gracias por ser como eres: luminosa, tierna, auténtica. Gracias por dejarme asomarme a tu mundo. Ojalá este año te trate con la misma bondad con que tú tratas a los demás, y ojalá me toque ver buena parte de él desde la primera fila.</p>
-      <p class="firma">Con mucho cariño,<small>Larry</small></p>
-    </div>
-  </section>
-</main>
-
-<!-- ================= BANDA SONORA ================= -->
-<section class="banda-sonora revela" id="musica">
-  <div class="interior">
-    <span class="num">Banda sonora</span>
-    <h2>Un libro así no se lee en silencio</h2>
-    <p>Armé esta lista pensando en ti. Toca el botón, dale play y deja que la fiesta siga mientras lees. Seguro encuentras a alguien conocido por ahí.</p>
-    <a class="boton spotify" target="_blank" rel="noopener" href="https://open.spotify.com/playlist/2upJkQO6wreR1uPZxHE4l4">Abrir la playlist en Spotify</a>
-  </div>
-</section>
-
-<!-- ================= FINAL ================= -->
-<footer class="final">
-  <div class="placa revela">
-    <svg class="corazon" viewBox="0 0 24 24" aria-hidden="true">
-      <defs><linearGradient id="gc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF6B57"/><stop offset="1" stop-color="#FF4F8B"/></linearGradient></defs>
-      <path fill="url(#gc)" d="M12 21.5c-.3 0-.6-.1-.8-.3C6.4 17.3 2.5 13.800 2.500 9.600 2.500 6.700 4.700 4.500 7.500 4.500c1.800 0 3.400.9 4.500 2.400 1.100-1.500 2.700-2.400 4.500-2.400 2.800 0 5 2.200 5 5.100 0 4.200-3.900 7.700-8.700 11.600-.2.200-.5.300-.8.300z"/>
-    </svg>
-    <q>Real hasta la muerte</q>
-  </div>
-  <p class="nota">Que este año te quede grande, Mileiny. Feliz cumpleaños.</p>
-  <button class="boton repetir" type="button" id="fiesta">Otra ronda de confeti</button>
-</footer>
+<button class="flecha izq" id="ant" type="button" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+<button class="flecha der" id="sig" type="button" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+<nav class="puntos" id="puntos" aria-label="Diapositivas"></nav>
 
 <script>
 (function(){
   "use strict";
   var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var deck = document.getElementById("deck");
+  var slides = Array.prototype.slice.call(deck.querySelectorAll(".slide"));
+  var puntos = document.getElementById("puntos");
+  var actual = 0;
+  var colores = ["#FF6B57","#FFB02E","#E0457B","#1FB5A6","#6C3FC5","#2F6FED"];
 
-  // ---------- NOMBRE QUE SALTA ----------
-  var nombre = document.getElementById("nombre");
-  var texto = nombre.textContent;
+  // ---------- nombre que salta ----------
+  var nombre = document.getElementById("nombre"), texto = nombre.textContent;
   nombre.textContent = "";
-  nombre.setAttribute("aria-label", texto);
   for (var i = 0; i < texto.length; i++){
-    var s = document.createElement("span");
-    s.textContent = texto[i];
-    s.setAttribute("aria-hidden", "true");
-    nombre.appendChild(s);
+    var sp = document.createElement("span"); sp.textContent = texto[i]; sp.setAttribute("aria-hidden","true"); nombre.appendChild(sp);
   }
 
-  // ---------- GLOBOS ----------
-  var colores = ["#FF6B57","#FFC93C","#FF8FB1","#26C6B0","#7C4DDB","#2F6FED"];
+  // ---------- globos y banderines ----------
   var globos = document.getElementById("globos");
   if (!quieto){
     for (var g = 0; g < 9; g++){
-      var b = document.createElement("span");
-      b.className = "globo";
+      var b = document.createElement("span"); b.className = "globo";
       b.style.setProperty("--c", colores[g % colores.length]);
       b.style.setProperty("--x", (4 + g * 11 + (g % 2) * 3) + "%");
       b.style.setProperty("--w", (46 + (g * 13) % 36) + "px");
@@ -301,94 +390,92 @@
       globos.appendChild(b);
     }
   }
-
-  // ---------- BANDERINES ----------
-  var svg = document.getElementById("banderines");
-  var NS = "http://www.w3.org/2000/svg";
+  var NS = "http://www.w3.org/2000/svg", svg = document.getElementById("banderines");
   for (var k = 0; k < 22; k++){
-    var t = (k + .5) / 22, x = t * 1200;
-    // aproxima la curva de la cuerda
-    var y = 8 + 36 * Math.sin(t * Math.PI * 1.6) * (1 - t * .35);
+    var t = (k + .5) / 22, x = t * 1200, y = 8 + 36 * Math.sin(t * Math.PI * 1.6) * (1 - t * .35);
     var tri = document.createElementNS(NS, "path");
-    tri.setAttribute("d", "M" + (x - 17) + " " + y.toFixed(1) + " L" + (x + 17) + " " + y.toFixed(1) + " L" + x + " " + (y + 34).toFixed(1) + " Z");
-    tri.setAttribute("fill", colores[k % colores.length]);
-    tri.setAttribute("opacity", ".92");
+    tri.setAttribute("d","M"+(x-17)+" "+y.toFixed(1)+" L"+(x+17)+" "+y.toFixed(1)+" L"+x+" "+(y+34).toFixed(1)+" Z");
+    tri.setAttribute("fill", colores[k % colores.length]); tri.setAttribute("opacity",".92");
     svg.appendChild(tri);
   }
 
-  // ---------- CONFETI ----------
-  var cv = document.getElementById("confeti");
-  var ctx = cv.getContext("2d");
-  var piezas = [], corriendo = false, W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-  function medir(){
-    var r = cv.getBoundingClientRect();
-    W = r.width; H = r.height;
-    cv.width = W * dpr; cv.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  // ---------- confeti ----------
+  var cv = document.getElementById("confeti"), ctx = cv.getContext("2d");
+  var piezas = [], W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), corre = false;
+  function medir(){ W = window.innerWidth; H = window.innerHeight; cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+  function nueva(x, y){
+    var ang = Math.random() * Math.PI - Math.PI, v = 6 + Math.random() * 9;
+    return {x:x, y:y, vx:Math.cos(ang)*v + (Math.random()-.5)*2, vy:Math.sin(ang)*v, w:6+Math.random()*8, h:4+Math.random()*6,
+      rot:Math.random()*6.28, vr:(Math.random()-.5)*.3, c:colores[(Math.random()*colores.length)|0], vida:170};
   }
-  function nueva(x, y, explosion){
-    var ang = explosion ? (Math.random() * Math.PI - Math.PI) : Math.PI / 2;
-    var v = explosion ? 6 + Math.random() * 9 : 1 + Math.random() * 2;
-    return {
-      x: x, y: y, vx: Math.cos(ang) * v + (Math.random() - .5) * 2, vy: Math.sin(ang) * v,
-      w: 6 + Math.random() * 8, h: 4 + Math.random() * 6, rot: Math.random() * 6.28, vr: (Math.random() - .5) * .3,
-      c: colores[(Math.random() * colores.length) | 0], vida: explosion ? 190 : 9999
-    };
-  }
-  function lluvia(){ for (var n = 0; n < 40; n++) piezas.push(nueva(Math.random() * W, -Math.random() * H, false)); }
   function paso(){
-    ctx.clearRect(0, 0, W, H);
-    for (var n = piezas.length - 1; n >= 0; n--){
+    ctx.clearRect(0,0,W,H);
+    for (var n = piezas.length-1; n >= 0; n--){
       var p = piezas[n];
-      p.vy += .12; p.vx *= .992; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.vida--;
-      if (p.vida < 0 || p.y > H + 20){
-        if (p.vida < 0 || piezas.length > 60) { piezas.splice(n, 1); continue; }
-        p.y = -10; p.x = Math.random() * W; p.vy = 1 + Math.random() * 2; p.vx = (Math.random() - .5) * 1.5;
-      }
-      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-      ctx.globalAlpha = p.vida < 40 ? Math.max(p.vida / 40, 0) : 1;
-      ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-      ctx.restore();
+      p.vy += .14; p.vx *= .992; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.vida--;
+      if (p.vida < 0 || p.y > H + 20){ piezas.splice(n,1); continue; }
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.globalAlpha = p.vida < 40 ? Math.max(p.vida/40,0) : 1;
+      ctx.fillStyle = p.c; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
     }
-    requestAnimationFrame(paso);
+    if (piezas.length) requestAnimationFrame(paso); else corre = false;
   }
   function explotar(cx, cy, n){
-    for (var j = 0; j < n; j++) piezas.push(nueva(cx, cy, true));
-  }
-  if (!quieto){
-    medir(); lluvia(); paso(); corriendo = true;
-    window.addEventListener("resize", medir);
-    setTimeout(function(){ explotar(W / 2, H * .35, 110); }, 500);
-    cv.parentNode.addEventListener("pointerdown", function(e){
-      if (e.target.closest("a,button")) return;
-      var r = cv.getBoundingClientRect(); explotar(e.clientX - r.left, e.clientY - r.top, 45);
-    });
-  }
-
-  // ---------- BOTONES ----------
-  document.getElementById("abrir").addEventListener("click", function(){
-    if (!quieto && corriendo){
-      var r = this.getBoundingClientRect(), c = cv.getBoundingClientRect();
-      explotar(r.left + r.width / 2 - c.left, r.top - c.top, 90);
-    }
-  });
-  document.getElementById("fiesta").addEventListener("click", function(){
     if (quieto) return;
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setTimeout(function(){ explotar(W / 2, H * .3, 130); }, 700);
-  });
-
-  // ---------- REVELAR AL DESLIZAR ----------
-  var rev = document.querySelectorAll(".revela");
-  if ("IntersectionObserver" in window && !quieto){
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("visible"); io.unobserve(e.target); } });
-    }, { threshold: .12 });
-    rev.forEach(function(el){ io.observe(el); });
-  } else {
-    rev.forEach(function(el){ el.classList.add("visible"); });
+    if (!W) medir();
+    for (var j = 0; j < n; j++) piezas.push(nueva(cx, cy));
+    if (!corre){ corre = true; requestAnimationFrame(paso); }
   }
+  medir(); window.addEventListener("resize", medir);
+  setTimeout(function(){ explotar(window.innerWidth/2, window.innerHeight*.38, 110); }, 500);
+
+  // ---------- navegacion ----------
+  slides.forEach(function(s, idx){
+    var d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label","Ir a la diapositiva " + (idx+1));
+    d.addEventListener("click", function(){ ir(idx); }); puntos.appendChild(d);
+  });
+  function ir(i){
+    i = Math.max(0, Math.min(slides.length-1, i));
+    deck.scrollTo({ left: i * deck.clientWidth, behavior: quieto ? "auto" : "smooth" });
+  }
+  function marcar(i){
+    actual = i;
+    Array.prototype.forEach.call(puntos.children, function(d, idx){ d.className = idx === i ? "act" : ""; });
+    slides.forEach(function(s, idx){ s.classList.toggle("on", idx === i); });
+    document.getElementById("ant").disabled = i === 0;
+    document.getElementById("sig").disabled = i === slides.length-1;
+    var oscuro = i === slides.length-1;
+    puntos.style.setProperty("--fade", oscuro ? "rgba(30,15,46,.94)" : "rgba(255,244,230,.94)");
+    puntos.querySelectorAll("button:not(.act)").forEach(function(d){ d.style.background = oscuro ? "rgba(255,255,255,.4)" : ""; });
+  }
+  var ticking = false;
+  deck.addEventListener("scroll", function(){
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function(){
+      ticking = false;
+      var i = Math.round(deck.scrollLeft / deck.clientWidth);
+      if (i !== actual){ marcar(i); if (i === slides.length-1) explotar(W/2, H*.3, 70); }
+    });
+  });
+  window.addEventListener("resize", function(){ deck.scrollLeft = actual * deck.clientWidth; });
+  document.getElementById("ant").addEventListener("click", function(){ ir(actual-1); });
+  document.getElementById("sig").addEventListener("click", function(){ ir(actual+1); });
+  document.getElementById("empezar").addEventListener("click", function(e){
+    var r = this.getBoundingClientRect(); explotar(r.left + r.width/2, r.top, 90); ir(1);
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "ArrowRight" || e.key === "PageDown") { ir(actual+1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { ir(actual-1); }
+  });
+  marcar(0);
+
+  // ---------- reproductor ----------
+  var tel = document.getElementById("telefono");
+  document.getElementById("play").addEventListener("click", function(){
+    var on = tel.classList.toggle("reproduciendo");
+    this.setAttribute("aria-label", on ? "Pausar" : "Reproducir");
+    if (on) { var r = this.getBoundingClientRect(); explotar(r.left + r.width/2, r.top, 40); }
+  });
 })();
 </script>
 </body>
