@@ -218,8 +218,20 @@
   .reproductor .boton{margin-top:26px; justify-content:center; width:100%}
   .cierre{font-family:var(--ui); font-size:15px; opacity:.85; text-align:center; margin:16px 0 0}
 
+  .brrr{position:absolute; z-index:40; pointer-events:none; font-family:var(--ui); font-weight:700; font-style:italic; letter-spacing:.04em; color:#FFF1C9;
+    text-shadow:0 4px 0 #E0457B, 0 8px 18px rgba(0,0,0,.45); font-size:var(--t,56px); transform-origin:center; opacity:0; animation:brrr 1.3s ease-out forwards}
+  @keyframes brrr{
+    0%{opacity:0; transform:translate(-50%,-50%) rotate(var(--r,-8deg)) scale(.2)}
+    18%{opacity:1; transform:translate(-50%,-50%) rotate(var(--r,-8deg)) scale(1.25)}
+    26%{transform:translate(calc(-50% - 5px),-50%) rotate(var(--r,-8deg)) scale(1.15)}
+    34%{transform:translate(calc(-50% + 5px),-50%) rotate(var(--r,-8deg)) scale(1.2)}
+    42%{transform:translate(calc(-50% - 4px),-50%) rotate(var(--r,-8deg)) scale(1.15)}
+    50%{transform:translate(calc(-50% + 4px),-50%) rotate(var(--r,-8deg)) scale(1.2)}
+    75%{opacity:1; transform:translate(-50%,-50%) rotate(var(--r,-8deg)) scale(1.1)}
+    100%{opacity:0; transform:translate(-50%,-60%) rotate(var(--r,-8deg)) scale(.8)}
+  }
   #confeti{position:absolute; inset:0; width:100%; height:100%; z-index:30; pointer-events:none}
-  @media (prefers-reduced-motion:reduce){ .serp,.racimo,.titulo .nombre span,.llama,.sonando .barra i,.sonando .disco-titulo,.sobre-hint,.tarjeta.sig .estado{animation:none !important} .ventana,.scr{transition:none !important} }
+  @media (prefers-reduced-motion:reduce){ .serp,.racimo,.titulo .nombre span,.llama,.sonando .barra i,.sonando .disco-titulo,.brrr,.sobre-hint,.tarjeta.sig .estado{animation:none !important} .ventana,.scr{transition:none !important} }
 </style>
 </head>
 <body>
@@ -429,7 +441,7 @@
   var NS = "http://www.w3.org/2000/svg";
   var colores = ["#FF6B57","#FFB02E","#E0457B","#1FB5A6","#6C3FC5","#2F6FED"];
   var ORDEN = ["pastel","feed","notas","correo","musica"];
-  var desbloqueado = 0, hechas = {}, abierta = null, timerSeguro = null, iniciar = {};
+  var desbloqueado = 0, hechas = {}, abierta = null, timerSeguro = null, iniciar = {}, musicaTimer = null;
 
   // ---------- nombre que salta ----------
   var nombre = $("nombre"), texto = nombre.textContent; nombre.textContent = "";
@@ -536,6 +548,7 @@
   }
   function cerrar(){
     if (!abierta) return;
+    if (abierta === "musica"){ clearInterval(musicaTimer); musicaTimer = null; }
     $("w-" + abierta).classList.remove("abierta"); abierta = null;
     clearTimeout(timerSeguro); refrescar();
   }
@@ -618,10 +631,39 @@
   $("play").addEventListener("click", function(){
     var on = rep.classList.toggle("sonando");
     this.setAttribute("aria-label", on ? "Pausar" : "Reproducir");
-    if (on){ var r = this.getBoundingClientRect(); confeti(r.left + r.width/2, r.top, 45); }
+    if (on){ var r = this.getBoundingClientRect(); confeti(r.left + r.width/2, r.top, 45); brrr(); setTimeout(brrr, 350); }
   });
   $("estrella").addEventListener("click", function(){ this.classList.toggle("on"); });
-  iniciar.musica = function(){ setTimeout(function(){ desdeCentro(80); completar("musica"); }, 600); };
+  // confeti que sale por los lados y se repite, con el "brrr" de Anuel
+  function canon(x, y, haciaDerecha, n){
+    if (quieto) return; if (!W) medir();
+    for (var j = 0; j < n; j++){
+      var ang = (haciaDerecha ? -Math.PI/4 : -3*Math.PI/4) + (Math.random()-.5)*.7, v = 9 + Math.random() * 9;
+      piezas.push({x:x, y:y, vx:Math.cos(ang)*v, vy:Math.sin(ang)*v, w:6+Math.random()*8, h:4+Math.random()*6,
+        rot:Math.random()*6.28, vr:(Math.random()-.5)*.3, c:colores[(Math.random()*colores.length)|0], vida:190});
+    }
+    if (!corre){ corre = true; requestAnimationFrame(paso); }
+  }
+  function brrr(){
+    if (quieto) return;
+    var host = $("w-musica"), r = host.getBoundingClientRect(), b = document.createElement("span");
+    b.className = "brrr"; b.textContent = "BRRR";
+    var lado = Math.random() < .5;
+    b.style.left = (lado ? 26 + Math.random()*10 : 64 + Math.random()*10) + "%";
+    b.style.top = (18 + Math.random()*56) + "%";
+    b.style.setProperty("--r", (lado ? -1 : 1) * (6 + Math.random()*10) + "deg");
+    b.style.setProperty("--t", (44 + Math.random()*36) + "px");
+    host.appendChild(b); setTimeout(function(){ b.remove(); }, 1400);
+  }
+  function fiestaFinal(){
+    var h = window.innerHeight, w = window.innerWidth;
+    canon(0, h*.92, true, 55); canon(w, h*.92, false, 55);
+    brrr();
+  }
+  iniciar.musica = function(){
+    setTimeout(function(){ fiestaFinal(); completar("musica"); }, 600);
+    clearInterval(musicaTimer); musicaTimer = setInterval(fiestaFinal, 3200);
+  };
 })();
 </script>
 </body>
